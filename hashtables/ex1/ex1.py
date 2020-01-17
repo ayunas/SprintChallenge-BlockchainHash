@@ -14,27 +14,27 @@ start = time()
 
 def get_indices_of_item_weights(weights, length, limit):
     ht = HashTable(16)
-    # for w in weights:
-    #     hash_table_insert(ht,w,(limit - w))
+    for w in weights:
+        hash_table_insert(ht,w,(limit - w))
     
-    # arr = []
+    arr = []
     
-    # for w in weights:
-    #     # value = limit - prev_w   v = limit - w
-    #     v = hash_table_retrieve(ht,w)
-    #     if w == v:
-    #         # old_w = limit - v
-    #         old_w = limit - v
-    #         return (w,old_w)
-    #     # if len(arr) > 2:
-    #     #     break
+    for w in weights:
+        # value = limit - prev_w   v = limit - w
+        v = hash_table_retrieve(ht,w)
+        if w == v:
+            # old_w = limit - v
+            old_w = limit - v
+            return (w,old_w)
+        # if len(arr) > 2:
+        #     break
     
-    # # return None
+    # return None
 
-    for w1 in weights:
-        for w2 in weights:
-            if w1 + w2 == limit:
-                return (w1,w2)
+    # for w1 in weights:
+    #     for w2 in weights:
+    #         if w1 + w2 == limit:
+    #             return (w1,w2)
 
     return None
 

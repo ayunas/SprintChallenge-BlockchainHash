@@ -11,13 +11,39 @@ class Ticket:
         self.source = source
         self.destination = destination
 
+    def __repr__(self):
+        Ticket = {
+            'source': self.source,
+            'destination': self.destination
+        }
+        return str(Ticket)
+    
+
 
 def reconstruct_trip(tickets, length):
     hashtable = HashTable(length)
     route = [None] * length
+    print(hashtable)
+    print(tickets)
 
     """
     YOUR CODE HERE
     """
 
     return route
+
+
+tickets = [
+  Ticket("PIT","ORD"),
+  Ticket("XNA","CID"),
+  Ticket("SFO","BHM"),
+  Ticket("FLG","XNA"),
+  Ticket("NONE", "LAX"),
+  Ticket("LAX","SFO"),
+  Ticket("CID","SLC"),
+  Ticket("ORD","NONE"),
+  Ticket("SLC","PIT"),
+  Ticket("BHM","FLG")
+]
+
+reconstruct_trip(tickets,len(tickets))
