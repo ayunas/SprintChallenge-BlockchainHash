@@ -9,27 +9,6 @@ from timeit import default_timer as timer
 
 import random
 
-
-def proof_of_work(last_proof):
-    """
-    Multi-Ouroboros of Work Algorithm
-    - Find a number p' such that the last six digits of hash(p) are equal
-    to the first six digits of hash(p')
-    - IE:  last_hash: ...AE9123456, new hash 123456888...
-    - p is the previous proof, and p' is the new proof
-    - Use the same method to generate SHA-256 hashes as the examples in class
-    """
-
-    start = timer()
-
-    print("Searching for next proof")
-    proof = 0
-    #  TODO: Your code here
-
-    print("Proof found: " + str(proof) + " in " + str(timer() - start))
-    return proof
-
-
 def valid_proof(last_hash, proof):
     """
     Validates the Proof:  Multi-ouroborus:  Do the last six characters of
@@ -40,8 +19,46 @@ def valid_proof(last_hash, proof):
     """
 
     # TODO: Your code here!
-    pass
+    hashed_proof = hashlib.sha256(f'{proof}'.encode('utf-8')).hexdigest()
+    return last_hash[-6:] == hashed_proof[:6]
 
+
+def proof_of_work(last_proof):
+    """
+    Multi-Ouroboros of Work Algorithm
+    - Find a number p' such that the last six digits of hash(p) are equal
+    to the first six digits of hash(p')
+    - IE:  last_hash: ...AE9123456, new hash 123456888...
+    - p is the previous proof, and p' is the new proof
+    - Use the same method to generate SHA-256 hashes as the examples in class
+    """
+     # while not valid_proof(last_hash,proof):
+    #     proof += 1
+    #     last_hash = current_hash
+
+
+    start = timer()
+
+    print("Searching for next proof")
+    proof = 0
+    #  TODO: Your code here
+    last_hash = hash_proof(last_proof)
+    current_hash = hash_proof(proof)
+
+    '''Without the valid_proof helper function'''
+    while last_hash[-6:] != current_hash[:6]:
+        proof += 1
+        last_hash = current_hash
+        current_hash = hash_proof(proof)
+    
+    print("Proof found: " + str(proof) + " in " + str(timer() - start))
+    print('last_hash: ' + last_hash)
+    print('current_hash: ' + current_hash)
+    return proof
+
+def hash_proof(proof):
+    encoded_str = str(proof).encode('utf-8')
+    return hashlib.sha256(encoded_str).hexdigest()
 
 if __name__ == '__main__':
     # What node are we interacting with?
