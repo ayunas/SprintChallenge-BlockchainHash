@@ -36,7 +36,7 @@ def get_indices_of_item_weights(weights, length, limit):
     #         if w1 + w2 == limit:
     #             return (w1,w2)
 
-    return None
+    # return None
 
 # x = get_indices_of_item_weights([12,0,23,34,5,23,12,22,34,12,22,2,22,2,12,100],16,44)
 

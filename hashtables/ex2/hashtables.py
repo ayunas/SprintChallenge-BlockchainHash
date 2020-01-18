@@ -28,8 +28,8 @@ class HashTable:
     
     def __repr__(self):
         HashTable = {
-            'capacity': self.capacity,
-            'storage': self.storage
+            "capacity": self.capacity,
+            "storage": self.storage
         }
         return str(HashTable)
 
