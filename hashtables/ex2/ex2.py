@@ -38,8 +38,6 @@ def reconstruct_trip(tickets, length):
         next_trip = [t for t in tickets if t.source == next_source][0]
         route[i] = next_trip
         
-        
-
     trip = [r.destination for r in route]
     return trip
 

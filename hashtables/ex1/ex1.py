@@ -14,22 +14,23 @@ start = time()
 
 def get_indices_of_item_weights(weights, length, limit):
     ht = HashTable(16)
-    for w in weights:
-        hash_table_insert(ht,w,(limit - w))
+    for i,w in enumerate(weights):
+        hash_table_insert(ht,w,i)
     
-    arr = []
-    
-    for w in weights:
+    for i,w in enumerate(weights):
         # value = limit - prev_w   v = limit - w
-        v = hash_table_retrieve(ht,w)
-        if w == v:
-            # old_w = limit - v
-            old_w = limit - v
-            return (w,old_w)
-        # if len(arr) > 2:
-        #     break
-    
-    # return None
+        w2 = (limit - w)
+        # print('w1', w)
+        # print('w2', w2)
+        print('possible addition', w,w2)
+        j = hash_table_retrieve(ht,w2)
+        # print('i',i)
+        if j:
+            print('j', j, f'{weights[j]} + {w}')
+        if not j:
+            continue
+        else: return (i,j) if i > j else (j,i)
+    return None
 
     # for w1 in weights:
     #     for w2 in weights:
@@ -40,9 +41,9 @@ def get_indices_of_item_weights(weights, length, limit):
 
 # x = get_indices_of_item_weights([12,0,23,34,5,23,12,22,34,12,22,2,22,2,12,100],16,44)
 
-arr = [randint(1,1000) for i in range(1000000)]
+arr = [randint(1,100) for i in range(500)]
 
-iw = get_indices_of_item_weights(arr,len(arr),1000)
+iw = get_indices_of_item_weights(arr,len(arr),150)
 print(iw)
 
 # def print_answer(answer):

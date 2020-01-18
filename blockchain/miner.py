@@ -14,11 +14,8 @@ def valid_proof(last_hash, proof):
     Validates the Proof:  Multi-ouroborus:  Do the last six characters of
     the hash of the last proof match the first six characters of the hash
     of the new proof?
-
-    IE:  last_hash: ...AE9123456, new hash 123456E88...
     """
 
-    # TODO: Your code here!
     hashed_proof = hashlib.sha256(f'{proof}'.encode('utf-8')).hexdigest()
     return last_hash[-6:] == hashed_proof[:6]
 
@@ -48,17 +45,19 @@ def proof_of_work(last_proof):
     '''Without the valid_proof helper function'''
     while last_hash[-6:] != current_hash[:6]:
         proof += 1
-        last_hash = current_hash
+        # last_hash = current_hash
         current_hash = hash_proof(proof)
     
     print("Proof found: " + str(proof) + " in " + str(timer() - start))
-    print('last_hash: ' + last_hash)
-    print('current_hash: ' + current_hash)
+    print('last_hash: ' + last_hash, last_hash[-6:])
+    print('current_hash: ' + current_hash, current_hash[:6])
     return proof
 
 def hash_proof(proof):
     encoded_str = str(proof).encode('utf-8')
     return hashlib.sha256(encoded_str).hexdigest()
+
+# x = proof_of_work(1005)
 
 if __name__ == '__main__':
     # What node are we interacting with?
